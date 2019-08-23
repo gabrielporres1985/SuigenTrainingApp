@@ -1,2 +1,0 @@
-# MopalApplication
-Mopal App
