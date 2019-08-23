@@ -1,0 +1,1 @@
+include "training:app", "training:app:view", "training:app:model", "training:app:core", "training:app:services"

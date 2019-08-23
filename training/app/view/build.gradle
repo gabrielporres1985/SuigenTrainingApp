@@ -1,0 +1,62 @@
+apply plugin: 'distribution'
+
+sourceSets.main {
+    java.srcDirs = ['src/main/java','src_managed/main/mm']
+}
+
+task rebuild {
+    dependsOn clean, build
+}
+
+dependencies {
+//    mm project(':mopal:app:model')
+    compile project(':training:app:model')
+
+//    mm project(':mopal:app:core')
+    compile project(':training:app:core')
+    
+//    mm project(':mopal:app:services')
+    compile project(':training:app:services')
+}
+
+def moduleName =  projectDir.parentFile.parentFile.name + "-" + projectDir.parentFile.name + "-" + project.name
+jar.archiveName = moduleName + ".jar"
+
+distributions {
+    main {
+        baseName "mopal"
+        contents  {
+            fileMode = 0755
+            from { jar.archivePath }
+            from { configurations.runtime }
+            into 'lib'
+        }
+    }
+}
+
+processResources.doLast{
+    createVersionProperties()
+}
+
+def createVersionProperties(){
+    def versionProps = new File(project.buildDir, '/training.version')
+    versionProps.getParentFile().mkdirs()
+    versionProps.write("#Training Version Info")
+    versionProps.append("\nbuild.version=" + buildVersion)
+    versionProps.append("\nbuild.number=" + buildNumber+"\n")
+}
+
+jar {
+    //Include the version file in the JAR root
+    from { project.buildDir.absolutePath + '/training.version' }
+}
+
+task copyVersionFile(type: Copy) {
+    from { project.buildDir.absolutePath + '/training.version' }
+    into project.buildDir.absolutePath + '/install/training'
+}
+
+installDist.doLast {
+    //The version file needs to be in the distribution root
+    copyVersionFile.execute()
+}

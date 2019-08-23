@@ -1,0 +1,24 @@
+apply plugin: 'tekgenesis.dist'
+
+description = "Training Application"
+
+group = "com.gporres.training"
+version "${buildVersion}.${buildNumber}-${buildBranch}"
+ext.artifactName = "app"
+
+distributions {
+    application {
+        baseName = artifactName
+        type = 'application'
+        projects = [ project(':training:app:view') ]
+    }
+    metamodels {
+        baseName = "${artifactName}-metamodels"
+        projects = [ project(':training:app:model'), project(':training:app:core'), project(':training:app:services'), project(':training:app:view') ]
+    }
+
+    services {
+        baseName = "${artifactName}-services"
+        projects = [ project(':training:app:services')]
+    }
+}
