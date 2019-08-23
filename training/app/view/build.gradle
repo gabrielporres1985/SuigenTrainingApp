@@ -9,13 +9,8 @@ task rebuild {
 }
 
 dependencies {
-//    mm project(':mopal:app:model')
     compile project(':training:app:model')
-
-//    mm project(':mopal:app:core')
     compile project(':training:app:core')
-    
-//    mm project(':mopal:app:services')
     compile project(':training:app:services')
 }
 
