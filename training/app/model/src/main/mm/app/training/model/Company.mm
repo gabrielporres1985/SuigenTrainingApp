@@ -10,4 +10,6 @@ entity Company
     companyAddress: String;
     companyTelephone: String;
     companyExtraData: String;
+    companyPerson: Person*;
+    companySaleOportunity: SaleOportunity*;
 }

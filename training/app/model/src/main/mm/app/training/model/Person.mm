@@ -14,6 +14,6 @@ entity Person
     personGenre: Genre;
     personId: String;
     personTelephone: String;
-    personCompany: Company;
+    personCompany: Company, optional;
 
 }

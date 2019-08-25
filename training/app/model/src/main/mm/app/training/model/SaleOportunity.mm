@@ -1,7 +1,7 @@
 package app.training.model;
 
-entity SaleOportunity {
-    client: Person;
+entity SaleOportunity searchable by {company}{
+    company: Company;
     initialDate: Date;
     status: SaleStatus;
 }

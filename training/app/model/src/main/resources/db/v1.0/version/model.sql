@@ -1,4 +1,4 @@
--- @Generated at 2019-08-22 23:49:03
+-- @Generated at 2019-08-25 00:03:01
 
 -- SQL for Schema MODEL --
 
@@ -38,7 +38,7 @@ create table QName(MODEL, PERSON) (
 	PERSON_GENRE                      nvarchar(50)     default 'FEMALE'         not null,
 	PERSON_ID                         nvarchar(255)    default EmptyString      not null,
 	PERSON_TELEPHONE                  nvarchar(255)    default EmptyString      not null,
-	PERSON_COMPANY_ID                 int                                       not null,
+	PERSON_COMPANY_ID                 int,
 	UPDATE_TIME                       datetime(3)      default CurrentTime      not null,
 
 	constraint PK_PERSON              primary key (ID)
@@ -56,7 +56,7 @@ create table QName(MODEL, PRODUCT) (
 
 create table QName(MODEL, SALE_OPORTUNITY) (
 	ID                                Serial(1,SALE_OPORTUNITY_SEQ)             not null,
-	CLIENT_ID                         int                                       not null,
+	COMPANY_ID                        int                                       not null,
 	INITIAL_DATE                      date             default CurrentDate      not null,
 	STATUS                            nvarchar(50)     default 'STARTED'        not null,
 	UPDATE_TIME                       datetime(3)      default CurrentTime      not null,
@@ -79,9 +79,9 @@ alter table QName(MODEL, PERSON) add constraint PERSON_COMPANY_PERSON_FK
 	foreign key (PERSON_COMPANY_ID)
 	references QName(MODEL, COMPANY) (ID);;
 
-alter table QName(MODEL, SALE_OPORTUNITY) add constraint CLIENT_SALE_OPORTUNITY_FK
-	foreign key (CLIENT_ID)
-	references QName(MODEL, PERSON) (ID);;
+alter table QName(MODEL, SALE_OPORTUNITY) add constraint COMPANY_SALE_OPORTUNITY_FK
+	foreign key (COMPANY_ID)
+	references QName(MODEL, COMPANY) (ID);;
 
 -- if NeedsSerialComment
 comment on column QName(MODEL,COMPANY).ID                  is 'Serial(1,COMPANY_SEQ)';;
