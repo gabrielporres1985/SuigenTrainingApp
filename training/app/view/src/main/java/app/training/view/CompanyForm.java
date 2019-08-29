@@ -11,4 +11,7 @@ public class CompanyForm
 
     public class CompanySaleOportunityRow extends CompanySaleOportunityRowBase {
     }
+
+    public class CompanyAddressRow extends CompanyAddressRowBase {
+    }
 }

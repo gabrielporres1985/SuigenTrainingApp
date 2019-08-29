@@ -6,4 +6,6 @@ public class SaleOportunityForm
     extends SaleOportunityFormBase
 {
 
+    public class ProductsRow extends ProductsRowBase {
+    }
 }

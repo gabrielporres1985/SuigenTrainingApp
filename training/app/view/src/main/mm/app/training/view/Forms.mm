@@ -15,12 +15,13 @@ form PersonForm "Person Form": Person {
     "Id"                   : id, internal, optional;
     "Person Name"          : personName;
     "Person Last Name"     : personLastName;
-    "Person Age"           : personAge, mask decimal;
-    "Person Date Of Birth" : personDateOfBirth;
+    "Person Age"           : personAge, mask decimal, optional ;
+    "Person Date Of Birth" : personDateOfBirth, optional ;
     "Person Genre"         : personGenre;
     "Person Id"            : personId;
     "Person Telephone"     : personTelephone;
     "Person Company"       : personCompany, optional;
+    "Person Picture"       : personPicture, optional;
 
     footer {
         button(save);
@@ -60,28 +61,41 @@ form CompanyForm "Company Form": Company {
 
     "Id"                      : id, internal, optional;
     "Company Name"            : companyName;
-    "Company Address"         : companyAddress;
+    "Company Logo"            : companyLogo;
     "Company Telephone"       : companyTelephone;
     "Company Extra Data"      : companyExtraData;
+
+    "Company Address"         : companyAddress, table {
+        companyStreetName: streetName;
+        companyStreetNumber: streetNumber;
+        companyBuildId: storageId;
+        companyZipCode: zipCode;
+    };
+
+	horizontal {
+		button(add_row, companyAddress);
+		button(remove_row, companyAddress);
+	};
+
     "Company Person"          : companyPerson, table {
         companyPersonId: id, internal, optional;
-        name: personName;
-        lastName: personLastName;
-        age: personAge;
-        dateOfBirth: personDateOfBirth;
-        genre: personGenre;
-        personId: personId;
-        telephone: personTelephone;
+        name: personName, display;
+        lastName: personLastName, display;
+        telephone: personTelephone, display;
+        personPicture: personPicture, disable;
     };
+
 	horizontal {
 		button(add_row, companyPerson);
 		button(remove_row, companyPerson);
 	};
+
     "Company Sale Oportunity" : companySaleOportunity, table{
         saleOportunityId: id, internal, optional;
         saleOportunityInitialDate: initialDate;
         saleOportunityStatus: status;
     };
+
 	horizontal {
 		button(add_row, companySaleOportunity);
 		button(remove_row, companySaleOportunity);
@@ -106,6 +120,16 @@ form SaleOportunityForm "Sale Oportunity Form": SaleOportunity {
     "Company"      : company;
     "Initial Date" : initialDate;
     "Status"       : status;
+    "Person"       : person;
+    "Products"     : products, table {
+        productItem: product;
+        quantityItem: quantity;
+    };
+
+	horizontal {
+		button(add_row);
+		button(remove_row);
+	};
 
     footer {
         button(save);

@@ -9,11 +9,11 @@ entity Person
 {
     personName: String;
     personLastName: String;
-    personAge: Int;
-    personDateOfBirth: Date;
+    personAge: Int, optional ;
+    personDateOfBirth: Date, optional ;
     personGenre: Genre;
     personId: String;
     personTelephone: String;
     personCompany: Company, optional;
-
+    personPicture: Resource, optional;
 }
